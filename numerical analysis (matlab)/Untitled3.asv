@@ -1,0 +1,30 @@
+x = input('x= ');
+
+fx=log(x);
+
+int i;
+
+xr=0;
+for i=1:n
+     
+    xi = input('x0 ');
+    n= input('iteration ');
+    x=xi_1;
+    fxi_1 = exp(-x)-x;
+    x=xi;
+    fxi = exp(-x)-x;   
+    
+    xrold=xr;
+    xr = xi - ((fxi*(xi_1-xi))/(fxi_1-fxi));
+    
+    error = abs( (xr-xrold)/xr );
+    error=error*100;
+    
+    fprintf('\nx%d=%f\nError=%f%%\n',i,xr,error);
+     
+    xi_1=xi;
+    xi=xr;
+   
+    
+    
+end

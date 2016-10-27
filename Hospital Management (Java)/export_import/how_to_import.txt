@@ -1,0 +1,1 @@
+imp system/manager file ="C:\filename.dmp" full=y

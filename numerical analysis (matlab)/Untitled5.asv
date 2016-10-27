@@ -1,0 +1,37 @@
+xi_1= input('lower limit ');
+xi=input('upper limit ');
+es=input('Estimate error: ');
+
+xr=0;
+error=100;
+
+while (error>es)
+    
+    x=xi_1;
+    fxi_1 = exp(-x)-x;
+    
+    x=xi;
+    fxi = exp(-x)-x;
+    
+    
+   
+    xrold=xr;
+    xr = xi -( (fxi*(xi_1-xi))/(fxi_1-fxi) ); 
+    
+    if  xr~=0
+        error = abs((xr-xrold)/xr);
+        error=error*100;
+    end
+    
+    if xr==0
+        error=Inf;
+    end
+     
+    fprintf('\nX%.0f=%f\nApp. Error=%f\n',i,real(xr),real(error) );
+    
+    xi_1=xi;
+    xi=xr; 
+    
+end
+    
+    

@@ -1,0 +1,2 @@
+exp system/manager file ="C:\filename.dmp"
+ 

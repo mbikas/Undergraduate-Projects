@@ -1,0 +1,139 @@
+//create table list;
+
+//////////////////////////;
+
+create table id_print(indoor_id number,outdoor_id number);
+/////////////////////////////////////;
+
+create table patient_id_generator(indoor_id number,outdoor_id number);
+insert into patient_id_generator values(1,1);
+
+create table patient_names_age(patient_id number,patient_name varchar(20),
+patient_father_name varchar(20),patient_age number(10),
+patient_sex varchar(10),patient_religion varchar(15),
+patient_husband_name varchar(20),primary key(patient_id));
+
+Create table patient_address(patient_id number,present_add varchar(50),
+permanent_add varchar(50),occupation varchar(20),contact varchar(15),
+primary key(patient_id),
+foreign key(patient_id) references patient_names_age(patient_id));
+
+Create table patient_relative_dept_doc (patient_id number,
+r_name varchar(25),r_add varchar(150),disease varchar(50),dept varchar(20),
+doc varchar(20),primary key(patient_id),
+foreign key(patient_id) references patient_names_age(patient_id));
+
+create table patient_seat(patient_id number,ward number,bed number,cabin number,
+gb number,pb number,primary key(patient_id),
+foreign key(patient_id) references patient_names_age(patient_id));
+
+Create table patient_adm_date(patient_id number, dat date,
+primary key(patient_id),
+foreign key(patient_id) references patient_names_age(patient_id));
+
+create table outdoor_patient(serial number,name varchar(20),dept varchar(20),
+doctor varchar(20),age number,medicine varchar(80),
+primary key(serial));
+
+create table old_patient_info(id number,name varchar(20),age number,sex varchar(10),
+adm_date date,rel_date date,primary key(id) );
+
+create table supply_entry(name varchar(25),dept varchar(15),quantity number,price number,
+primary key(name,dept));
+
+create table seat_id_generator(ward_id number,cabin_id number,gb_id number,pb_id number);
+insert into seat_id_generator values(1,1,1,1);
+
+create table total_ward_cabin_gb_pb(total_cabin number,total_ward number,
+total_gb number,total_pb number);
+
+create table cabin_info(cabin_no number,flag number,primary key(cabin_no));
+
+create table ward_info(ward_no number,bed_no number, flag number,
+primary key(ward_no,bed_no)); 
+
+create table gb_info(gb_no number,flag number,primary key(gb_no));
+
+create table pb_info(pb_no number,flag number,primary key(pb_no));
+
+
+create table doc_stuff_id_gen(doctor_id number,stuff_id number);
+insert into doc_stuff_id_gen values(1,1);
+
+create table doctor_info(doctor_id number,name varchar(20),dept varchar(20),
+religion varchar(10),age number,degree varchar(20),address varchar(80),
+salary number,sex varchar(7),dates varchar(20),
+primary key(doctor_id));
+
+create table stuff_info(stuff_id number,name varchar(20),dept varchar(20),
+religion varchar(10),age number,degree varchar(20),address varchar(80),
+salary number,sex varchar(7),dates varchar(20),
+primary key(stuff_id));
+
+
+create table doctor_schedule(doctor_id number,days varchar(10),starts varchar(10),
+ends varchar(10),primary key(doctor_id,days), foreign key(doctor_id) references doctor_info(doctor_id));
+
+create table stuff_schedule(stuff_id number,days varchar(10),starts varchar(10),
+ends varchar(10),primary key(stuff_id,days), foreign key(stuff_id) references stuff_info(stuff_id));
+
+
+create table bill_1(patient_id number,bed number,cabin number,ot number,delivery number,
+pack number,po number,nebu number,oxyzen number,primary key(patient_id),
+foreign key(patient_id) references patient_names_age(patient_id));
+
+create table bill_2(patient_id number,patho number,radio number,ecg number,urine number,
+dressing number,misc number,service number,primary key(patient_id),
+foreign key(patient_id) references patient_names_age(patient_id));
+
+create table bill_money(patient_id number,total number,discount number,
+final_amount number,due number,
+primary key(patient_id),foreign key(patient_id) references patient_names_age(patient_id));
+
+create table bill_advance(patient_id number,advance number,
+primary key(patient_id),foreign key(patient_id) references patient_names_age(patient_id));
+
+
+create table id_print(indoor_id number,outdoor_id number);
+create table user_password(name varchar(20),pass varchar(20),primary key(name));
+create table income(dates varchar(12),indoor number,outdoor number,primary key(dates));
+
+
+
+//drop tables
+
+
+drop table bill_1;
+drop table bill_2;
+drop table bill_money;
+drop table bill_advance;
+drop table patient_adm_date;
+drop table patient_seat;
+drop table patient_relative_dept_doc;
+drop table patient_address;
+drop table patient_names_age;
+
+drop table old_patient_info;
+
+drop table patient_id_generator;
+
+drop table outdoor_patient;
+drop table supply_entry;
+
+drop table seat_id_generator;
+drop table ward_info;
+drop table cabin_info;
+drop table gb_info;
+drop table pb_info;
+drop table total_ward_cabin_gb_pb;
+
+drop table doc_stuff_id_gen;
+drop table doctor_schedule;
+drop table stuff_schedule;
+drop table doctor_info;
+drop table stuff_info;
+
+drop table id_print;
+drop table user_password;
+drop table income;
+

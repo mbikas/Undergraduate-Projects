@@ -1,0 +1,136 @@
+  NAME    :  MD ABU NASER BIKAS
+  REG. NO :  2002331056
+  YEAR    :  THIRD
+  SEMESTER:  FIRST
+  DEPT.   :  CSE
+
+
+
+
+
+
+
+
+/////////////////////////Implementing the queries over the tables////////////////////////////
+
+1. select customer_name,customer_city from customer 
+    where customer_name IN   
+     (select customer_name from borrower);
+
+
+2. select customer_name,customer_city from customer where customer_name IN
+    ( select customer_name from borrower where loan_number IN
+       ( select loan_number from loan where branch_name = 'Perryridge'
+       )
+    ); 
+
+
+3.  select COUNT(account_number) from account where balance BETWEEN 700 AND 900;
+     
+
+4.  select customer_name from customer where customer_street like '%Hill';
+ 
+
+5.  select customer_name from depositor where account_number IN
+     (select account_number from account where branch_name = 'Perryridge')
+ 			INTERSECT
+    select customer_name from borrower where loan_number IN
+     (select loan_number from loan where branch_name = 'Perryridge'); 
+
+
+
+6.  select customer_name from depositor where account_number IN
+     (select account_number from account where branch_name='Perryridge')
+     			INTERSECT
+    select customer_name from borrower where loan_number IN
+     ( select loan_number from loan where branch_name!='Perryridge' ); 
+
+
+
+7.   		/* SAME AS 1 */  
+     select customer_name,customer_city from customer 
+      where customer_name IN
+         (select customer_name from borrower);
+
+
+8 . select customer_name from depositor where account_number IN 
+    (  select account_number from account where branch_name IN
+       ( select branch_name from account where account_number IN
+          ( select account_number from depositor where customer_name = 'Hayes'  
+          )
+       )    
+    );
+
+
+9.  select branch_name from branch where
+     assets>(select MIN(assets) from branch) ;
+
+
+10. select branch_name from branch where 
+      assets >  all( select assets from branch 
+                      where branch_city = 'Brooklyn');
+
+
+11. 			/*  SAME AS 5 */
+    select customer_name from depositor where account_number IN
+    (select account_number from account where branch_name = 'Perryridge')
+ 			INTERSECT
+    select customer_name from borrower where loan_number IN
+    (select loan_number from loan where branch_name = 'Perryridge'); 
+
+
+12. 		/* SAME AS 6 */
+    select customer_name from depositor where account_number IN
+     (select account_number from account where branch_name='Perryridge')
+     			INTERSECT
+    select customer_name from borrower where loan_number IN
+     ( select loan_number from loan where branch_name!='Perryridge' ); 
+
+
+
+13. select customer_name from depositor where account_number  IN
+    (select account_number from account where branch_name = 'Perryridge')
+     			UNION
+    select customer_name from borrower where loan_number  IN
+    (select loan_number from loan where branch_name = 'Perryridge');
+  
+ 
+14. select * from loan order by amount DESC,loan_number ASC;
+
+
+15. select distinct branch_name, AVG(balance) from account  group by branch_name;
+
+16. select branch_name,COUNT(account_number) from account group by branch_name;
+
+
+17. select AVG(balance) from account;
+
+
+18. select branch_name from account where balance IN
+     (
+       select avg(balance) from account group by branch_name 
+                  INTERSECT
+       select balance from account where balance>700
+     );
+
+        
+
+
+19. select branch_name from account where 
+       balance >  ( select avg(balance) from account); 
+
+20. select COUNT(customer_name) from customer;
+
+
+21.  select balance from account where account_number IN
+     ( select account_number from depositor where customer_name IN      
+        (    ( select customer_name from depositor INTERSECT  select customer_name from borrower) 
+                                           INTERSECT  
+             ( select customer_name from customer where customer_city = 'Harrision')   
+        )   
+     );
+   
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+ 
+ 
